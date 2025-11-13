@@ -1,24 +1,26 @@
 <template>
   <div class="list">
-      <!--
-        TASK:
-        1. Display all students in a list using the StudentCard component to display each student.
-        2. Use the transition-group component to animate the list.
-        3. Catch the 'remove' event and emit 'remove-student' from this component with the student's id.
-    -->
+    <transition-group name="fade" tag="div" class="cards">
+      <StudentCard
+        v-for="student in students"
+        :key="student.id"
+        :student="student"
+        @remove="remove(student.id)"
+      />
+    </transition-group>
   </div>
 </template>
 
 <script setup>
-import StudentCard from './StudentCard.vue'
+import StudentCard from "./StudentCard.vue";
 
 defineProps({
-  students: Array
-})
+  students: Array,
+});
 
-const emit = defineEmits(['remove-student'])
+const emit = defineEmits(["remove-student"]);
 
-const remove = (id) => emit('remove-student', id)
+const remove = (id) => emit("remove-student", id);
 </script>
 
 <style scoped>
