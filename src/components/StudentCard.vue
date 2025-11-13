@@ -1,10 +1,10 @@
 <template>
   <div class="card">
     <div class="info">
-      <!--
-        TASK:
-        1. Display student name and age via <p> tag.
-      -->
+      <p>
+        <strong>{{ student.name }}</strong>
+      </p>
+      <p>Age: {{ student.age }}</p>
     </div>
     <button @click="$emit('remove')" class="remove-btn">✖</button>
   </div>
@@ -12,8 +12,8 @@
 
 <script setup>
 defineProps({
-  student: Object
-})
+  student: Object,
+});
 </script>
 
 <style scoped>
