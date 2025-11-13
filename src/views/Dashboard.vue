@@ -2,42 +2,40 @@
   <div class="app">
     <h1>🎓 Student Dashboard</h1>
 
+    <button class="add-btn" @click="toggleForm">
+      {{ showForm ? "Close Form" : "Add Student" }}
+    </button>
+
     <transition name="fade">
-      <AddStudentForm
-        v-if="showForm"
-        @add-student="addStudent"
-      />
+      <AddStudentForm v-if="showForm" @add-student="addStudent" />
     </transition>
 
-    <StudentList
-      :students="students"
-      @remove-student="removeStudent"
-    />
+    <StudentList :students="students" @remove-student="removeStudent" />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import StudentList from '../components/StudentList.vue'
-import AddStudentForm from '../components/AddStudentForm.vue'
+import { ref } from "vue";
+import StudentList from "../components/StudentList.vue";
+import AddStudentForm from "../components/AddStudentForm.vue";
 
 const students = ref([
-  { id: 1, name: 'Alice Johnson', age: 21 },
-  { id: 2, name: 'Michael Smith', age: 22 },
-])
+  { id: 1, name: "Alice Johnson", age: 21 },
+  { id: 2, name: "Michael Smith", age: 22 },
+]);
 
-const showForm = ref(false)
+const showForm = ref(false);
 
-const toggleForm = () => (showForm.value = !showForm.value)
+const toggleForm = () => (showForm.value = !showForm.value);
 
 const addStudent = (student) => {
-  students.value.push({ id: Date.now(), ...student })
-  showForm.value = false
-}
+  students.value.push({ id: Date.now(), ...student });
+  showForm.value = false;
+};
 
 const removeStudent = (id) => {
-  students.value = students.value.filter((s) => s.id !== id)
-}
+  students.value = students.value.filter((s) => s.id !== id);
+};
 </script>
 
 <style scoped>
@@ -45,7 +43,7 @@ const removeStudent = (id) => {
   max-width: 600px;
   margin: 40px auto;
   text-align: center;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background: #f9f9fb;
   border-radius: 16px;
   padding: 30px;
